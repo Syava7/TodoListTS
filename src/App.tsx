@@ -15,18 +15,10 @@ function App() {
         { id: 3, isDone: false, title: 'VUE'}
     ]
 
-    const taskToBuy: Array<TaskType> = [
-        { id: 4, isDone: true, title: 'ReactHooks'},
-        { id: 5, isDone: true, title: 'CSS3'},
-        { id: 6, isDone: false, title: 'VUE3'} //// dsjjcldjfld
-    ]
-
     return (
         <div className="App">
            <TodoList title={'Hello word'}
                      tasks={ taskToLearn }/>
-           <TodoList title={'Hello word'}
-                     tasks={ taskToBuy }/>
         </div>
     );
 }
