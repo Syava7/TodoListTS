@@ -18,7 +18,7 @@ function App() {
     const taskToBuy: Array<TaskType> = [
         { id: 4, isDone: true, title: 'ReactHooks'},
         { id: 5, isDone: true, title: 'CSS3'},
-        { id: 6, isDone: false, title: 'VUE3'}
+        { id: 6, isDone: false, title: 'VUE3'} //// dsjjcldjfld
     ]
 
     return (
