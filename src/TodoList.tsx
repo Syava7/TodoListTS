@@ -60,7 +60,8 @@ function TodoList(props: TodoListPropsType) {
         onChange={(e) => props.changeTaskStatus(t.id, e.currentTarget.checked, props.todoListID)}/>
       <span>{t.title}</span>
       <button
-        onClick={() => {props.removeTask(t.id, props.todoListID)}}>Delete
+        onClick={() => {props.removeTask(t.id, props.todoListID)}}>
+          Delete
       </button>
     </li>))
 
