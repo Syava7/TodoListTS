@@ -2,12 +2,15 @@ import React, {useState, ChangeEvent, KeyboardEvent} from 'react'
 import {FilterValueTypes, TaskType} from './App';
 
 type TodoListPropsType = {
+  todoListID: string
   title: string
   tasks: Array<TaskType>
   filter: FilterValueTypes
-  addTask: (title: string) => void
-  removeTask: (taskId: string) => void
-  changeFilter: (value: FilterValueTypes) => void
+  addTask: (title: string, todoListID: string) => void
+  removeTask: (taskId: string, todoListID: string) => void
+  changeFilter: (value: FilterValueTypes, todoListID: string) => void
+  changeTaskStatus: (taskID: string, newIsDoneValue: boolean, todoListID: string) => void
+  removeTodoList: (todoListID: string) => void
 }
 
 function TodoList(props: TodoListPropsType) {
@@ -17,7 +20,7 @@ function TodoList(props: TodoListPropsType) {
 
   const onClickAddTask = () => {
     if (title.trim()) {
-      props.addTask(title)
+      props.addTask(title, props.todoListID)
     } else {
       setError(true)
     }
@@ -37,12 +40,15 @@ function TodoList(props: TodoListPropsType) {
   }
 
   const onClickAllFilter = () => {
-    props.changeFilter('all')
+    props.changeFilter('all', props.todoListID)
   }
+  const onClickRemoveTodolist = () => props.removeTodoList(props.todoListID)
 
   return (
     <div>
-      <h3>{props.title}</h3>
+      <h3>{props.title}
+        <button onClick={onClickRemoveTodolist}>x</button>
+      </h3>
       <div>
         <input className={error ? 'error' : ''}
                value={title}
@@ -54,10 +60,13 @@ function TodoList(props: TodoListPropsType) {
       <ul>
         {
           props.tasks.map((t) => <li className={t.isDone ? 'is-done' : ''} key={t.id}>
-            <input type="checkbox" checked={t.isDone}/>
+            <input
+              type="checkbox"
+              checked={t.isDone}
+              onChange={(e) => props.changeTaskStatus(t.id, e.currentTarget.checked, props.todoListID)}/>
             <span>{t.title}</span>
             <button onClick={() => {
-              props.removeTask(t.id)
+              props.removeTask(t.id, props.todoListID)
             }}>Delete
             </button>
           </li>)
@@ -67,11 +76,11 @@ function TodoList(props: TodoListPropsType) {
         <button className={props.filter === 'all' ? 'active-filter' : ''} onClick={onClickAllFilter}>All
         </button>
         <button className={props.filter === 'active' ? 'active-filter' : ''} onClick={() => {
-          props.changeFilter('active')
+          props.changeFilter('active', props.todoListID)
         }}>Active
         </button>
         <button className={props.filter === 'completed' ? 'active-filter' : ''} onClick={() => {
-          props.changeFilter('completed')
+          props.changeFilter('completed', props.todoListID)
         }}>Completed
         </button>
       </div>
