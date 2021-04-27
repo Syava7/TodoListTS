@@ -24,10 +24,12 @@ type TaskStateType = {
 function App() {
   const todoListID_1 = v1()
   const todoListID_2 = v1()
+
   const [todoLists, setTodoLists] = useState<Array<TodoListType>>([
     {id: todoListID_1, title: 'What to learn', filter: 'all'},
     {id: todoListID_2, title: 'What to buy', filter: 'all'},
   ]);
+
   const [tasks, setTasks] = useState<TaskStateType>({
     [todoListID_1]: [
       {id: v1(), isDone: true, title: 'React'},
@@ -64,8 +66,6 @@ function App() {
     })
   }
 
-
-
   function getTasksForTodoList(todoList: TodoListType) {
     switch (todoList.filter) {
       case 'active':
@@ -82,6 +82,11 @@ function App() {
     delete tasks[todoListID]
   }
 
+  function changeFilter(value: FilterValueTypes, todoListID: string) {
+    setTodoLists(todoLists.map(tl => tl.id === todoListID
+      ? {...tl, filter: value}
+      : tl))
+  }
 
   const todoListsComponents = todoLists.map(tl => {
     return (
@@ -98,12 +103,6 @@ function App() {
       />
     )
   })
-
-  function changeFilter(value: FilterValueTypes, todoListID: string) {
-    setTodoLists(todoLists.map(tl => tl.id === todoListID
-      ? {...tl, filter: value}
-      : tl))
-  }
 
   return (
     <div className="App">
