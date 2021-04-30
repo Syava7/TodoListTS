@@ -24,10 +24,12 @@ type TaskStateType = {
 function App() {
   const todoListID_1 = v1()
   const todoListID_2 = v1()
+  const todoListID_3 = v1()
 
   const [todoLists, setTodoLists] = useState<Array<TodoListType>>([
     {id: todoListID_1, title: 'What to learn', filter: 'all'},
     {id: todoListID_2, title: 'What to buy', filter: 'all'},
+    {id: todoListID_3, title: 'What to spend', filter: 'all'},
   ]);
 
   const [tasks, setTasks] = useState<TaskStateType>({
@@ -40,7 +42,12 @@ function App() {
       {id: v1(), isDone: true, title: 'Milk'},
       {id: v1(), isDone: true, title: 'Meat'},
       {id: v1(), isDone: false, title: 'Water'},
-    ]
+    ],
+    [todoListID_3]: [
+      {id: v1(), isDone: true, title: 'Money'},
+      {id: v1(), isDone: true, title: 'Time'},
+      {id: v1(), isDone: false, title: 'Nervous'},
+    ],
   })
 
   function removeTask(id: string, todoListID: string) {
