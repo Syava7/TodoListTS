@@ -3,6 +3,8 @@ import './App.css';
 import TodoList from './TodoList';
 import {v1} from 'uuid';
 import AddItemForm from './AddItemForm';
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 
 export type TaskType = {
   id: string,
@@ -120,26 +122,47 @@ function App() {
 
   const todoListsComponents = todoLists.map(tl => {
     return (
-      <TodoList title={tl.title}
-                tasks={getTasksForTodoList(tl)}
-                removeTask={removeTask}
-                changeFilter={changeFilter}
-                addTask={addTask}
-                filter={tl.filter}
-                changeTaskStatus={changeTaskStatus}
-                todoListID={tl.id}
-                key={tl.id}
-                removeTodoList={removeTodoList}
-                changeTaskTitle={changeTaskTitle}
-                changeTodoListTitle={changeTodoListTitle}
-      />
+      <Grid item>
+        <Paper>
+          <TodoList title={tl.title}
+                    tasks={getTasksForTodoList(tl)}
+                    removeTask={removeTask}
+                    changeFilter={changeFilter}
+                    addTask={addTask}
+                    filter={tl.filter}
+                    changeTaskStatus={changeTaskStatus}
+                    todoListID={tl.id}
+                    key={tl.id}
+                    removeTodoList={removeTodoList}
+                    changeTaskTitle={changeTaskTitle}
+                    changeTodoListTitle={changeTodoListTitle}
+          />
+        </Paper>
+      </Grid>
     )
   })
 
   return (
     <div className="App">
-      <AddItemForm addItem={addTodoList} />
-      {todoListsComponents}
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="start" color="inherit" aria-label="menu">
+            <MenuIcon/>
+          </IconButton>
+          <Typography variant="h6">
+            News
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+      <Container>
+        <Grid container>
+          <AddItemForm addItem={addTodoList}/>
+        </Grid>
+        <Grid container spacing={3}>
+          {todoListsComponents}
+        </Grid>
+      </Container>
     </div>
   );
 }

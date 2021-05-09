@@ -2,7 +2,7 @@ import React, {useState, ChangeEvent, KeyboardEvent} from 'react'
 import {FilterValueTypes, TaskType} from './App';
 import AddItemForm from './AddItemForm';
 import EditableSpan from './EditableSpan';
-import {Button, IconButton} from '@material-ui/core';
+import {Button, Checkbox, IconButton} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 type TodoListPropsType = {
@@ -51,8 +51,8 @@ function TodoList(props: TodoListPropsType) {
 
       return (
         <li className={t.isDone ? 'is-done' : ''} key={t.id}>
-          <input
-            type="checkbox"
+          <Checkbox
+            color="primary"
             checked={t.isDone}
             onChange={(e) => props.changeTaskStatus(t.id, e.currentTarget.checked, props.todoListID)}/>
           <EditableSpan title={t.title} changeTitle={changeTaskTitle}/>
