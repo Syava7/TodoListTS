@@ -2,6 +2,8 @@ import React, {useState, ChangeEvent, KeyboardEvent} from 'react'
 import {FilterValueTypes, TaskType} from './App';
 import AddItemForm from './AddItemForm';
 import EditableSpan from './EditableSpan';
+import {Button, IconButton} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 type TodoListPropsType = {
   todoListID: string
@@ -54,37 +56,35 @@ function TodoList(props: TodoListPropsType) {
             checked={t.isDone}
             onChange={(e) => props.changeTaskStatus(t.id, e.currentTarget.checked, props.todoListID)}/>
           <EditableSpan title={t.title} changeTitle={changeTaskTitle}/>
-          <button
-            onClick={() => {
-              props.removeTask(t.id, props.todoListID)
-            }}>
-            Delete
-          </button>
+          <IconButton color={'secondary'} onClick={() => {props.removeTask(t.id, props.todoListID)}}>
+            <DeleteIcon />
+          </IconButton>
         </li>)
     }
   )
-
 
   return (
     <div>
       <h3>
         <EditableSpan title={props.title} changeTitle={changeTodoListTitle}/>
-        <button onClick={onClickRemoveTodolist}>x</button>
+        <IconButton color={'secondary'} onClick={onClickRemoveTodolist}>
+          <DeleteIcon />
+        </IconButton>
       </h3>
       <AddItemForm addItem={addTask}/>
       <ul>
         {elementsLi}
       </ul>
       <div>
-        <button className={props.filter === 'all' ? 'active-filter' : ''}
+        <Button variant={props.filter === 'all' ? 'contained' : 'text'}
                 onClick={onClickAllFilter}>All
-        </button>
-        <button className={props.filter === 'active' ? 'active-filter' : ''}
+        </Button>
+        <Button color={'primary'} variant={props.filter === 'active' ? 'contained' : 'text'}
                 onClick={onClickActiveFilter}>Active
-        </button>
-        <button className={props.filter === 'completed' ? 'active-filter' : ''}
+        </Button>
+        <Button color={'secondary'} variant={props.filter === 'completed' ? 'contained' : 'text'}
                 onClick={onClickCompletedFilter}>Completed
-        </button>
+        </Button>
       </div>
     </div>
   )
