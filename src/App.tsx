@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './App.css';
+import s from './App.module.css'
 import TodoList from './TodoList';
 import {v1} from 'uuid';
 import AddItemForm from './AddItemForm';
@@ -122,8 +122,8 @@ function App() {
 
   const todoListsComponents = todoLists.map(tl => {
     return (
-      <Grid item>
-        <Paper>
+      <Grid item xs={4} key={tl.id}>
+        <Paper className={s.todoWrap} elevation={3}>
           <TodoList title={tl.title}
                     tasks={getTasksForTodoList(tl)}
                     removeTask={removeTask}
@@ -132,7 +132,6 @@ function App() {
                     filter={tl.filter}
                     changeTaskStatus={changeTaskStatus}
                     todoListID={tl.id}
-                    key={tl.id}
                     removeTodoList={removeTodoList}
                     changeTaskTitle={changeTaskTitle}
                     changeTodoListTitle={changeTodoListTitle}
@@ -145,18 +144,21 @@ function App() {
   return (
     <div className="App">
       <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
+        <Toolbar style={{justifyContent: 'space-between'}}>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu">
             <MenuIcon/>
           </IconButton>
           <Typography variant="h6">
-            News
+            Todolist
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" variant={'outlined'}>Login</Button>
         </Toolbar>
       </AppBar>
       <Container>
-        <Grid container>
+        <Grid container className={s.addItemFormWrap}>
           <AddItemForm addItem={addTodoList}/>
         </Grid>
         <Grid container spacing={3}>

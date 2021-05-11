@@ -40,9 +40,9 @@ function AddItemForm(props: AddItemFormPropsType) {
              size={'small'}
              error={error}
              value={title}
-             placeholder={error ? 'Title required' : ''}
              onChange={onChangeInput}
-             onKeyPress={onKeyPressAddItem}/>
+             onKeyPress={onKeyPressAddItem}
+             helperText={error && 'Title is required'}/>
       <IconButton
               color="primary"
               size="small"

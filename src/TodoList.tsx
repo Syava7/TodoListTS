@@ -43,14 +43,14 @@ function TodoList(props: TodoListPropsType) {
   const changeTodoListTitle = (title: string) => props.changeTodoListTitle(title, props.todoListID)
 
 
-  const elementsLi = props.tasks.map((t) => {
+  const elements = props.tasks.map((t) => {
 
       const changeTaskTitle = (title: string) => {
         props.changeTaskTitle(t.id, title, props.todoListID)
       }
 
       return (
-        <li className={t.isDone ? 'is-done' : ''} key={t.id}>
+        <div className={t.isDone ? 'is-done' : ''} key={t.id}>
           <Checkbox
             color="primary"
             checked={t.isDone}
@@ -59,7 +59,7 @@ function TodoList(props: TodoListPropsType) {
           <IconButton color={'secondary'} onClick={() => {props.removeTask(t.id, props.todoListID)}}>
             <DeleteIcon />
           </IconButton>
-        </li>)
+        </div>)
     }
   )
 
@@ -72,9 +72,9 @@ function TodoList(props: TodoListPropsType) {
         </IconButton>
       </h3>
       <AddItemForm addItem={addTask}/>
-      <ul>
-        {elementsLi}
-      </ul>
+      <div>
+        {elements}
+      </div>
       <div>
         <Button variant={props.filter === 'all' ? 'contained' : 'text'}
                 onClick={onClickAllFilter}>All
