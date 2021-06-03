@@ -62,7 +62,6 @@ function App() {
   })
 
   function removeTask(id: string, todoListID: string) {
-    tasks[todoListID] = tasks[todoListID].filter((t) => t.id !== id)
     dispatchToTasks(removeTasksAC(id, todoListID))
   }
 
