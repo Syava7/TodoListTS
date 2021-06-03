@@ -1,6 +1,6 @@
 import {FilterValueTypes, TasksStateType, TaskType, TodoListType} from '../App';
 import {v1} from 'uuid';
-import {AddTodoListAT, RemoveTodolistAT} from './todolists-reducer';
+import {AddTodoListAT, RemoveTodolistAT, todoListID_1, todoListID_2} from './todolists-reducer';
 
 export type RemoveTaskAT = {
   type: 'REMOVE_TASK'
@@ -29,9 +29,28 @@ export type ChangeTaskTitleAT = {
 }
 
 
+
+
+
+let initialState = {
+  [todoListID_1]: [
+    {id: v1(), isDone: true, title: 'React'},
+    {id: v1(), isDone: true, title: 'CSS'},
+    {id: v1(), isDone: false, title: 'VUE'},
+  ],
+  [todoListID_2]: [
+    {id: v1(), isDone: true, title: 'Milk'},
+    {id: v1(), isDone: true, title: 'Meat'},
+    {id: v1(), isDone: false, title: 'Water'},
+  ]
+}
+
+type initialStateType = typeof initialState
+
+
 export type ActionType = RemoveTaskAT | AddTaskAT | ChangeTaskStatusAT | ChangeTaskTitleAT | AddTodoListAT | RemoveTodolistAT
 
-export const tasksReducer = (state: TasksStateType, action: ActionType) => {
+export const tasksReducer = (state = initialState, action: ActionType): initialStateType => {
   switch (action.type) {
     case 'REMOVE_TASK':
       return {
@@ -78,7 +97,7 @@ export const tasksReducer = (state: TasksStateType, action: ActionType) => {
       delete copyState[action.todoListID]
       return copyState
     default:
-      throw new Error('Error')
+      return state
   }
 }
 
