@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import AppWithRedux from './AppWithReducer';
+import AppWithRedux from './AppWithRedux';
 import {store} from './store/store';
 
 ReactDOM.render(

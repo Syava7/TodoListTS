@@ -26,10 +26,11 @@ type ChangeTodoListFilterAT = {
 
 export const todoListID_1 = v1()
 export const todoListID_2 = v1()
-
-let initialState: Array<TodoListType> = []
+export const todoListID_3 = v1()
 
 export type ActionType = RemoveTodolistAT | AddTodoListAT | ChangeTodoListTitleAT | ChangeTodoListFilterAT
+
+let initialState: Array<TodoListType> = []
 
 export const todoListsReducer = (todoLists = initialState , action: ActionType): Array<TodoListType> => {
   switch (action.type) {

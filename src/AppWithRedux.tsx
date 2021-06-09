@@ -1,20 +1,18 @@
-import React, {useReducer, useState} from 'react';
+import React from 'react';
 import s from './App.module.css'
-import TodoList from './../TodoList';
-import {v1} from 'uuid';
-import AddItemForm from './../AddItemForm';
+import TodoList from './TodoList';
+import AddItemForm from './AddItemForm';
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import {
   RemoveTodoListAC,
-  todoListsReducer,
   AddTodoListAC,
   ChangeTodoListFilterAC,
   ChangeTodoListTitleAC
-} from './todolists-reducer';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTasksAC, tasksReducer} from './task-reducer';
+} from './store/todolists-reducer';
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTasksAC} from './store/task-reducer';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppRootStateType } from './store';
+import { AppRootStateType } from './store/store';
 
 export type TaskType = {
   id: string,
@@ -36,9 +34,7 @@ export type TasksStateType = {
 
 function AppWithRedux() {
 
-
   const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
-
   const todoLists = useSelector<AppRootStateType, TodoListType[]>(state => state.todoLists)
 
   const dispatch = useDispatch()
@@ -60,10 +56,8 @@ function AppWithRedux() {
     dispatch(changeTaskTitleAC(taskID, newTitle, todoListID))
   }
 
-
   function removeTodoList(todoListID: string) {
-    let action = RemoveTodoListAC(todoListID)
-    dispatch(action)
+    dispatch(RemoveTodoListAC(todoListID))
   }
 
   function changeFilter(value: FilterValueTypes, todoListID: string) {
@@ -75,8 +69,7 @@ function AppWithRedux() {
   }
 
   function addTodoList(title: string) {
-    let action = AddTodoListAC(title)
-    dispatch(action)
+    dispatch(AddTodoListAC(title))
   }
 
 
@@ -93,7 +86,7 @@ function AppWithRedux() {
 
   const todoListsComponents = todoLists.map(tl => {
     return (
-      <Grid item xs={4} key={tl.id}>
+      <Grid item key={tl.id}>
         <Paper className={s.todoWrap} elevation={3}>
           <TodoList title={tl.title}
                     tasks={getTasksForTodoList(tl)}

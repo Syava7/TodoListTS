@@ -124,7 +124,7 @@ function App() {
 
   const todoListsComponents = todoLists.map(tl => {
     return (
-      <Grid item xs={4} key={tl.id}>
+      <Grid item  key={tl.id}>
         <Paper className={s.todoWrap} elevation={3}>
           <TodoList title={tl.title}
                     tasks={getTasksForTodoList(tl)}

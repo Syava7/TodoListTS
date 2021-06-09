@@ -1,6 +1,6 @@
-import {FilterValueTypes, TasksStateType, TaskType, TodoListType} from '../App';
+import {TaskType} from '../App';
 import {v1} from 'uuid';
-import {AddTodoListAT, RemoveTodolistAT, todoListID_1, todoListID_2} from './todolists-reducer';
+import {AddTodoListAT, RemoveTodolistAT, todoListID_1, todoListID_2, todoListID_3} from './todolists-reducer';
 
 export type RemoveTaskAT = {
   type: 'REMOVE_TASK'
@@ -30,8 +30,6 @@ export type ChangeTaskTitleAT = {
 
 
 
-
-
 let initialState = {
   [todoListID_1]: [
     {id: v1(), isDone: true, title: 'React'},
@@ -42,7 +40,12 @@ let initialState = {
     {id: v1(), isDone: true, title: 'Milk'},
     {id: v1(), isDone: true, title: 'Meat'},
     {id: v1(), isDone: false, title: 'Water'},
-  ]
+  ],
+  [todoListID_3]: [
+    {id: v1(), isDone: true, title: 'Money'},
+    {id: v1(), isDone: true, title: 'Time'},
+    {id: v1(), isDone: false, title: 'Nervous'},
+  ],
 }
 
 type initialStateType = typeof initialState
@@ -55,7 +58,7 @@ export const tasksReducer = (state = initialState, action: ActionType): initialS
     case 'REMOVE_TASK':
       return {
         ...state,
-        [action.todoListID]: state[action.todoListID].filter(t => t.id != action.taskId)
+        [action.todoListID]: state[action.todoListID].filter(t => t.id !== action.taskId)
       }
     case 'ADD_TASK':
       let task: TaskType = {id: v1(), isDone: false, title: action.title}

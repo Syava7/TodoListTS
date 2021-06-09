@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useReducer} from 'react';
 import s from './App.module.css'
 import TodoList from './TodoList';
 import {v1} from 'uuid';
@@ -32,7 +32,7 @@ export type TasksStateType = {
   [key: string]: Array<TaskType>
 }
 
-function App() {
+function AppWithReducer() {
   const todoListID_1 = v1()
   const todoListID_2 = v1()
   const todoListID_3 = v1()
@@ -112,7 +112,7 @@ function App() {
 
   const todoListsComponents = todoLists.map(tl => {
     return (
-      <Grid item xs={4} key={tl.id}>
+      <Grid item key={tl.id}>
         <Paper className={s.todoWrap} elevation={3}>
           <TodoList title={tl.title}
                     tasks={getTasksForTodoList(tl)}
@@ -159,4 +159,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppWithReducer;
