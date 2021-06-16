@@ -4,7 +4,7 @@ import EditableSpan from './EditableSpan';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {TaskType} from './AppWithRedux';
 
-type TaskPropsType = {
+export type TaskPropsType = {
   task: TaskType
   todoListID: string
   removeTask: (taskId: string, todoListID: string) => void
